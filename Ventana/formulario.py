@@ -7,6 +7,10 @@ class Formulario:
         self.label_resultado = " "
         self.formulario = " "
         self.datos_cliente = []
+        self.entry_apellido = " "
+        self.entry_cedula = " "
+        self.entry_telefono = " "
+        self.entry_correo = " "
 
     def iniciar_ventana(self):
         self.formulario = Ventana.Tk() #widgets
@@ -21,46 +25,45 @@ class Formulario:
         label_nombre = Ventana.Label(text = "digite el nombre del cliente: ")
         label_nombre.config(padx=10, pady = 10, borderwidth=2, fg = "blue")
         label_nombre.pack()
+
         #entry ----> input text ---->cajitas de texto
         self.entry_nombre = Ventana.Entry(self.formulario)
         self.entry_nombre.config(bg = "yellow")
         self.entry_nombre.pack()
 
-        label_apellido = Ventana.Label(text = "Digite el apellido:")
+        label_apellido = Ventana.Label(text = "digite el apellido del cliente: ")
         label_apellido.pack()
 
         self.entry_apellido = Ventana.Entry(self.formulario)
         self.entry_apellido.pack()
 
-        label_cedula = Ventana.Label(text = "Digite la cedula:")
+        label_cedula = Ventana.Label(text = "digite la cedula del cliente: ")
         label_cedula.pack()
 
         self.entry_cedula = Ventana.Entry(self.formulario)
         self.entry_cedula.pack()
 
-
-        label_telefono = Ventana.Label(text = "Digite el telefono:")
+        label_telefono = Ventana.Label(text = "digite el telefono del cliente: ")
         label_telefono.pack()
 
         self.entry_telefono = Ventana.Entry(self.formulario)
         self.entry_telefono.pack()
 
-
-        label_correo = Ventana.Label(text = "Digite el correo:")
+        label_correo = Ventana.Label(text = "digite el correo del cliente: ")
         label_correo.pack()
 
         self.entry_correo = Ventana.Entry(self.formulario)
         self.entry_correo.pack()
 
         #button ----> boton
-        boton_enviar = Ventana.Button(self.formulario, text="Enviar", command=self.hacer_clic) #para enviar informacion, usar Lambda
+        boton_enviar = Ventana.Button(self.formulario, text="Enviar", command=self.procesar_formulario) #para enviar informacion, usar Lambda
         boton_enviar.configure(bg="orange")
-        boton_enviar.pack()
+        boton_enviar.pack()  
 
-    self.label_resultado = Ventana.Label(self.formulario,text="")
-        self.label_resultado.pack()
+    def hacer_clic(self):
+        print("clik....")
 
-def validar_campos(self):
+    def validar_campos(self):
         if self.entry_nombre.get() == "":
             return False
         if self.entry_apellido.get() == "":
@@ -82,15 +85,10 @@ def validar_campos(self):
             self.entry_correo.get()
         ]
 
-    def mostrar_resultado(self):
-        self.label_resultado.config(text="Formulario guardado correctamente")
-        print("Datos guardados:")
-        print(self.datos_cliente)
-
     def procesar_formulario(self):
         if self.validar_campos():
             self.guardar_datos()
-            self.mostrar_resultado()
-
+            print("Formulario guardado correctamente")
+            print(self.datos_cliente)
         else:
-            self.label_resultado.config(text="Hay campos vacios")
+            print("Hay campos vacios")
